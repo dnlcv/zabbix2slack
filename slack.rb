@@ -4,8 +4,19 @@ require 'json'
 require 'uri'
 require 'net/http'
 
-WEBHOOK  = "https://hooks.slack.com/services/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"
-USER     = "Zabbix-Events"
+# Define Constants
+WEBHOOK    = "https://hooks.slack.com/services/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"
+USER       = "Zabbix-Events"
+SEVERITIES = {
+  'Not classified' => '#97AAB3',
+  'Information'    => '#7499FF',
+  'Warning'        => '#FFC859',
+  'Average'        => '#FFA059',
+  'High'           => '#E97659',
+  'Disaster'       => '#E45959'
+}
+
+# Define Variables
 @type    = "plain"
 @emoji   = ":fog:"
 @message = nil
@@ -90,6 +101,15 @@ case @type
       exit 1
     end
     if @message.has_key?('attachments')
+      
+      @message['attachments'].each do |attachment|
+        if attachment.has_key?('color')
+          if SEVERITIES.has_key?(attachment['color'])
+            attachment['color'] = SEVERITIES[attachment['color']]
+          end
+        end
+      end
+
       @payload.merge!(@message)
     else
       puts "ERROR: JSON messages are only allowed for creating attached messages."
