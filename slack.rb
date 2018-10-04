@@ -1,3 +1,9 @@
+# Name::          zabbix2slack
+# Author::        Daniel Campos | daniel@fg.cr
+# Copyright::     Copyright (c) 2018 Daniel Campos
+# License::       MIT License
+# URL::           https://github.com/dnlcv/zabbix2slack
+#
 #!/usr/bin/env ruby
 
 require 'json'
@@ -5,8 +11,8 @@ require 'uri'
 require 'net/http'
 
 # Define Constants
-WEBHOOK    = "https://hooks.slack.com/services/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"
-USER       = "Zabbix-Events"
+WEBHOOK    = "YOUR-WEBHOOK-URL"  # Example: https://hooks.slack.com/services/XXXXXXXXX/ZZZZZZZZZ/BaQwL2tmRsDd56on94RuhExB
+USER       = "zabbix-events"
 SEVERITIES = {
   'Not classified' => '#97AAB3',
   'Information'    => '#7499FF',
