@@ -121,10 +121,21 @@ case @type
     exit 1
 end
 
-#puts "ARGV Size => #{ARGV.size}"
-#puts "ARGV => #{ARGV.inspect}"
-puts "PAYLOAD => #{@payload.inspect}"
+# Uncomment if you wan to see the payload
+# puts "PAYLOAD => #{@payload.inspect}"
 
-uri = URI(WEBHOOK)
-res = Net::HTTP.post_form(uri, 'payload' => @payload.to_json)
-puts res.body
+begin
+  uri = URI(WEBHOOK)
+  res = Net::HTTP.post_form(uri, 'payload' => @payload.to_json)
+  if res.body.strip.downcase != 'ok'
+    puts "ERROR: Webhook failed with: #{res.body}"
+    puts "ERROR: Webhook status code: #{res.code}"
+    exit 1
+  end
+rescue Exception => e
+  puts "ERROR: Caught Exception: #{e.inspect}"
+  exit 1
+end
+
+# The execution was successful
+exit 0
