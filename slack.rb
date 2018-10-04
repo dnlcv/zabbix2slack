@@ -82,13 +82,13 @@ case @type
       @payload['message'] = "#{ARGV[1]}"
     end
   when 'json'
-		# Parse the JSON message
-		begin
-			@message = JSON.parse(ARGV[2])
+    # Parse the JSON message
+    begin
+      @message = JSON.parse(ARGV[2])
     rescue Exception => e
       puts "ERROR: Caught Exception: #{e.inspect}"
-			exit 1
-		end
+      exit 1
+    end
     if @message.has_key?('attachments')
       @payload.merge!(@message)
     else
