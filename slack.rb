@@ -36,15 +36,6 @@ if ARGV.size < 3 || ARGV.size > 4
   puts "ERROR: Wrong number of parameters."
   usage();
   exit 1
-#else
-#  # Check for empty parameters
-#  ARGV.each do|a|
-#    if a.empty?
-#      puts "ERROR: Empty parameters are not supported."
-#      usage();
-#      exit 1
-#    end
-#  end
 end
 
 # Set the message type
