@@ -1,10 +1,10 @@
+#!/usr/bin/env ruby
+#
 # Name::          zabbix2slack
 # Author::        Daniel Campos | daniel@fg.cr
 # Copyright::     Copyright (c) 2018 Daniel Campos
 # License::       MIT License
 # URL::           https://github.com/dnlcv/zabbix2slack
-#
-#!/usr/bin/env ruby
 
 require 'json'
 require 'uri'
@@ -13,6 +13,7 @@ require 'net/http'
 # Define Constants
 WEBHOOK    = "YOUR-WEBHOOK-URL"  # Example: https://hooks.slack.com/services/XXXXXXXXX/ZZZZZZZZZ/BaQwL2tmRsDd56on94RuhExB
 USER       = "zabbix-events"
+# Change the severity names and colors to match the ones from your zabbix installation
 SEVERITIES = {
   'Not classified' => '#97AAB3',
   'Information'    => '#7499FF',
@@ -83,11 +84,11 @@ end
 case @type
   when 'plain'
     if (ARGV[1] =~ /^(PROBLEM|OK|RECOVER(Y|ED)?|WARN(ING)?)i$/i) && (!ARGV[2].empty?)
-      @payload['message'] = "#{ARGV[1]}: #{ARGV[2]}"
+      @payload['text'] = "#{ARGV[1]}: #{ARGV[2]}"
     elsif (!ARGV[2].empty?)
-      @payload['message'] = "#{ARGV[1]}\n#{ARGV[2]}"
+      @payload['text'] = "#{ARGV[1]}\n#{ARGV[2]}"
     elsif (ARGV[2].empty?)
-      @payload['message'] = "#{ARGV[1]}"
+      @payload['text'] = "#{ARGV[1]}"
     end
   when 'json'
     # Parse the JSON message
