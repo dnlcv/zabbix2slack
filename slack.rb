@@ -99,7 +99,6 @@ case @type
       exit 1
     end
     if @message.has_key?('attachments')
-      
       @message['attachments'].each do |attachment|
         if attachment.has_key?('color')
           if SEVERITIES.has_key?(attachment['color'])
@@ -107,10 +106,11 @@ case @type
           end
         end
       end
-
+      @payload.merge!(@message)
+    elsif @message.has_key?('text')
       @payload.merge!(@message)
     else
-      puts "ERROR: JSON messages are only allowed for creating attached messages."
+      puts "ERROR: JSON messages are only allowed for creating attached messages or formatted text messages."
       exit 1
     end
   else
