@@ -1,8 +1,7 @@
 #!/usr/bin/env ruby
 #
 # Name::          zabbix2slack
-# Author::        Daniel Campos | daniel@fg.cr
-# Copyright::     Copyright (c) 2018 Daniel Campos
+# Author::        Daniel Campos | daniel.campos@bodybuilding.com
 # License::       MIT License
 # URL::           https://github.com/dnlcv/zabbix2slack
 
